@@ -37,6 +37,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _val = 0;
   final int _selectedIndex = 2;
+  bool _isVisible = false;
+
+  void _showFAB() {
+    if (_isVisible == false) {
+      setState(() {
+        _isVisible = true;
+      });
+    } else {
+      setState(() {
+        _isVisible = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +80,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: 'HEALTH',
                 backgroundColor: Color(0xff170626)),
           ]),
+      floatingActionButton: Visibility(
+        visible: _isVisible,
+        child: SizedBox(
+          width: 40,
+          child: GestureDetector(
+            onLongPress: _resetDose,
+            child: FloatingActionButton(
+              splashColor: const Color(0xffcccccc),
+              backgroundColor: const Color(0xff170626),
+              onPressed: _moreDose,
+              child: const Icon(LineIcons.syringe),
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: RawScrollbar(
           thumbColor: Colors.grey,
@@ -91,8 +119,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  int dose = 1;
+  int initialDose = 3;
   List<String> ordinals = ['st', 'nd', 'rd', 'th'];
+
+  void _moreDose() {
+    setState(() {
+      initialDose++;
+    });
+  }
+
+  void _resetDose() {
+    setState(() {
+      initialDose = 3;
+    });
+  }
 
   Widget cardContent() {
     return Padding(
@@ -129,10 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                             Text(
-                              'Capt. Jack Sparrow, Male, 69',
+                              'Hideo Bojima, Male, 58',
                               style: TextStyle(color: Colors.white),
                             ),
-                            Text('IC Number 13371337',
+                            Text('IC Number 00420420',
                                 style: TextStyle(color: Colors.white)),
                           ],
                         ),
@@ -145,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text('Expiration time',
                                 style: TextStyle(
                                     color: Colors.white70, fontSize: 12.0)),
-                            Text('22 Apr 2022 23:59:59',
+                            Text('23 Apr 2022 23:59:59',
                                 style: TextStyle(
                                     color: Colors.white70, fontSize: 12.0))
                           ],
@@ -177,18 +217,26 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.only(top: 18.0, bottom: 8.0),
-                              child: Text(
-                                'COVID-19 Vaccination',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 18.0, bottom: 8.0),
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onDoubleTap: _showFAB,
+                                    child: const Text(
+                                      'COVID-19 Vaccination',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Wrap(runSpacing: 8.0, children: [
-                              doseMeUp(17),
+                              doseMeUp(initialDose),
                             ]),
                             const Padding(
                               padding: EdgeInsets.only(top: 24.0, bottom: 8.0),
@@ -231,16 +279,40 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  int ordinalIndex = 0;
+
   doseMeUp(var numberOfDoses) {
     return Wrap(
       runSpacing: 10,
       children: [
-        for (int i = 1; i < numberOfDoses; i++) doseCookie(i, ordinals),
+        for (int i = 0; i < numberOfDoses; i++) doseCookie(i + 1, ordinalIndex),
       ],
     );
   }
 
-  Wrap doseCookie(int dose, List<String> ordinals) {
+  String ordinal(int number) {
+    if (!(number >= 1 && number <= 1000)) {
+      //here you change the range
+      throw Exception('Invalid number');
+    }
+
+    if (number >= 11 && number <= 13) {
+      return 'th';
+    }
+
+    switch (number % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+
+  Wrap doseCookie(int dose, int ordinalIndex) {
     return Wrap(children: [
       const FaIcon(
         FontAwesomeIcons.solidCircleCheck,
@@ -249,8 +321,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       const SizedBox(width: 2.0),
       Text(
-        '$dose${ordinals[0]} Dose',
-        style: const TextStyle(color: Color(0xff4bae78)),
+        '$dose' + ordinal(dose) + ' Dose',
+        style: const TextStyle(height: 1.35, color: Color(0xff4bae78)),
       ),
       const SizedBox(width: 10.0),
     ]);
