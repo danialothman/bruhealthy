@@ -90,7 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
               splashColor: const Color(0xffcccccc),
               backgroundColor: const Color(0xff170626),
               onPressed: _moreDose,
-              child: const Icon(LineIcons.syringe),
+              child: const FaIcon(
+                FontAwesomeIcons.syringe,
+                size: 18,
+              ),
             ),
           ),
         ),
@@ -102,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           radius: const Radius.circular(5.0),
           child: NoScrollGlow(
             child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
               child: Container(
                 color: Colors.white12, // white12
                 child: Column(
@@ -159,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
                             Padding(
-                              padding: EdgeInsets.only(top: 24.0, bottom: 16.0),
+                              padding: EdgeInsets.only(top: 24.0, bottom: 10.0),
                               child: Text(
                                 'CODE GREEN',
                                 style: TextStyle(
@@ -185,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text('Expiration time',
                                 style: TextStyle(
                                     color: Colors.white70, fontSize: 12.0)),
-                            Text('23 Apr 2022 23:59:59',
+                            Text('24 Apr 2022 23:59:59',
                                 style: TextStyle(
                                     color: Colors.white70, fontSize: 12.0))
                           ],
@@ -324,7 +328,7 @@ class _MyHomePageState extends State<MyHomePage> {
         '$dose' + ordinal(dose) + ' Dose',
         style: const TextStyle(height: 1.35, color: Color(0xff4bae78)),
       ),
-      const SizedBox(width: 10.0),
+      const SizedBox(width: 8.0),
     ]);
   }
 
@@ -490,7 +494,7 @@ class _MyHomePageState extends State<MyHomePage> {
 Disclaimer: A preliminary assessment of your individual epidemic risk is provided for your reference based on your self-reported information, medical records. border control information, disease-control reported information as well as app-generated information such as Bluetooth proximity and GPS location. Given the complexity in epidemic tracking and assessment, we do not rule out that there maybe factors that turn out to be critical that we have not considered. Hence, please pay close attention to your own physical health and seek medical attention if unsure.
                 
                 ''',
-              style: TextStyle(color: Color(0xff99999b), fontSize: 12.0)),
+              style: TextStyle(color: Color(0xff99999b), fontSize: 13.0)),
         ],
       ),
     );
