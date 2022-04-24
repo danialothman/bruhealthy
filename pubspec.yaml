@@ -38,6 +38,7 @@ dependencies:
   material_design_icons_flutter: ^5.0.6595
   no_scroll_glow: ^1.0.0
   line_icons: ^2.0.1
+  wave: ^0.2.0
 
 dev_dependencies:
   flutter_test:
