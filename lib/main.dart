@@ -1,10 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:no_scroll_glow/no_scroll_glow.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
+
+// Card Content
+bool _onlyShowLastVac = true;
+String _name = "Danial Seaside";
+String _gender = "Male";
+String _idNumber = "00999999";
+String _age = "94";
+
+// Bottom Card Section
+double _buttonFontSize = 12.0;
+// _scanCodeIconColor
+// _healthCodeIconColor
+// _artIconColor
+
+// Vaccination Section
+double _vacFontSize = 10.0;
+// _appointmentIconColor
+// _certificateIconColor
+// _reportingIconColor
+
+// Services Section
+double _serviceFontSize = 11.0;
+// _homeIsoIconColor
+// _epidemicMapIconColor
+// _selfAssessIconColor
+// _tipIconColor
+// _bruneiIconColor
 
 void main() {
   runApp(const MyApp());
@@ -56,37 +81,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 40,
-        shadowColor: Colors.white12,
-        foregroundColor: Colors.white12,
-        backgroundColor: Colors.white12,
-        flexibleSpace: topBar(),
-      ),
       bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.white,
           selectedItemColor: const Color(0xff00cdbc),
           showUnselectedLabels: true,
           currentIndex: _selectedIndex,
+          type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(LineIcons.medicalClinic),
-                label: 'HOME',
+                icon: FaIcon(
+                  FontAwesomeIcons.house,
+                  color: Colors.grey,
+                ),
+                label: 'Home',
                 backgroundColor: Color(0xff170626)),
             BottomNavigationBarItem(
-                icon: Icon(LineIcons.alternateShare),
-                label: 'DYNAMIC',
+                icon: FaIcon(
+                  FontAwesomeIcons.solidCalendar,
+                  color: Colors.grey,
+                ),
+                label: 'Plan',
                 backgroundColor: Color(0xff170626)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.add),
-                label: 'CODE',
+                icon: Icon(Icons.health_and_safety),
+                label: '',
                 backgroundColor: Color(0xff170626)),
             BottomNavigationBarItem(
-                icon: Icon(LineIcons.cube),
-                label: 'ARTICLE',
+                icon: FaIcon(
+                  FontAwesomeIcons.solidFileLines,
+                  color: Colors.grey,
+                ),
+                label: 'Article',
                 backgroundColor: Color(0xff170626)),
             BottomNavigationBarItem(
-                icon: Icon(LineIcons.userNinja),
-                label: 'HEALTH',
+                icon: FaIcon(
+                  FontAwesomeIcons.solidUser,
+                  color: Colors.grey,
+                ),
+                label: 'Me',
                 backgroundColor: Color(0xff170626)),
           ]),
       floatingActionButton: Visibility(
@@ -116,11 +148,14 @@ class _MyHomePageState extends State<MyHomePage> {
             child: SingleChildScrollView(
               physics: const ClampingScrollPhysics(),
               child: Container(
-                color: Colors.white12, // white12
+                color: const Color(0xffe8e8e8), // white12
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     cardContent(),
-                    contentBottom(),
+                    cardContentBottom(),
+                    vacSection(),
+                    servicesSection()
                   ],
                 ),
               ),
@@ -146,212 +181,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Widget cardContent() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 32.0, right: 32.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Column(
-            children: [
-              Stack(
-                children: [
-                  Card(
-                    elevation: 0,
-                    margin: EdgeInsets.zero,
-                    clipBehavior: Clip.antiAlias,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                    ),
-
-                    // color: Colors.green,
-                    child: WaveWidget(
-                      config: CustomConfig(
-                        gradients: const [
-                          [Color(0xEE4bae78), Color(0xff357b54)],
-                          [Color(0xEE4cb27a), Color(0xff2b6545)],
-                          [Color(0xEE6dffc2), Color(0xff2a6143)],
-                          [Color(0xEE57cc9b), Color(0xff367f60)],
-                        ],
-                        durations: [35000, 19440, 12800, 10000],
-                        heightPercentages: [0.80, 0.83, 0.85, 0.88],
-                        gradientBegin: Alignment.topRight,
-                        gradientEnd: Alignment.bottomLeft,
-                      ),
-                      backgroundColor: const Color(0xff4bae78),
-                      duration: 32000,
-                      waveAmplitude: 0,
-                      heightPercentange: 1,
-                      size: const Size(
-                        double.infinity,
-                        150,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                        // color: Color(0xff4bae78),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            topRight: Radius.circular(10.0))),
-                    // color: Colors.green,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 24.0, bottom: 10.0),
-                                  child: Text(
-                                    'CODE GREEN',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18.0),
-                                  ),
-                                ),
-                                Text(
-                                  'Hideo Bojima, Male, 58',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text('IC Number 00420420',
-                                    style: TextStyle(color: Colors.white)),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(top: 24.0, bottom: 0.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text('Expiration time',
-                                    style: TextStyle(
-                                        color: Colors.white70, fontSize: 12.0)),
-                                Text('24 Apr 2022 23:59:59',
-                                    style: TextStyle(
-                                        color: Colors.white70, fontSize: 12.0))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Card(
-                elevation: 3,
-                margin: EdgeInsets.zero,
-                clipBehavior: Clip.antiAlias,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
-                ),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //       color: Colors.black12,
-                    //       blurRadius: 6,
-                    //       offset: Offset(0, 2))
-                    // ],
-                    // borderRadius: BorderRadius.only(
-                    //     bottomLeft: Radius.circular(10.0),
-                    //     bottomRight: Radius.circular(10.0)),
-                  ),
-                  // color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 18.0, bottom: 8.0),
-                                child: Row(
-                                  children: [
-                                    GestureDetector(
-                                      onDoubleTap: _showFAB,
-                                      child: const Text(
-                                        'COVID-19 Vaccination',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.0),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Wrap(runSpacing: 8.0, children: [
-                                doseMeUp(initialDose),
-                              ]),
-                              const Padding(
-                                padding:
-                                    EdgeInsets.only(top: 24.0, bottom: 8.0),
-                                child: Text(
-                                  'COVID-19 Test',
-                                  style: TextStyle(
-                                      color: Color(0xffd1d1d1),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0),
-                                ),
-                              ),
-                              Row(
-                                children: const [
-                                  FaIcon(
-                                    FontAwesomeIcons.solidCircleQuestion,
-                                    size: 18.0,
-                                    color: Color(0xffd1d1d1),
-                                  ),
-                                  SizedBox(width: 5.0),
-                                  Text(
-                                    'Result not available',
-                                    style: TextStyle(color: Color(0xffd1d1d1)),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 24.0,
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   int ordinalIndex = 0;
 
   doseMeUp(var numberOfDoses) {
     return Wrap(
       runSpacing: 10,
       children: [
-        for (int i = 0; i < numberOfDoses; i++) doseCookie(i + 1, ordinalIndex),
+        if (_onlyShowLastVac) (doseCookie(initialDose, ordinalIndex)),
+        if (!_onlyShowLastVac)
+          for (int i = 0; i < numberOfDoses; i++)
+            doseCookie(i + 1, ordinalIndex),
       ],
     );
   }
@@ -481,84 +320,638 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget contentBottom() {
+  Widget cardContent() {
     return Padding(
-      padding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 16.0),
+      padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 18.0, bottom: 8.0),
+            child: Text(
+              "Public Health",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Column(
+            children: [
+              Stack(
+                children: [
+                  Card(
+                    elevation: 0,
+                    margin: EdgeInsets.zero,
+                    clipBehavior: Clip.antiAlias,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+
+                    // color: Colors.green,
+                    child: WaveWidget(
+                      config: CustomConfig(
+                        gradients: const [
+                          [Color(0xEE4bae78), Color(0xff357b54)],
+                          [Color(0xEE4cb27a), Color(0xff2b6545)],
+                          [Color(0xEE6dffc2), Color(0xff2a6143)],
+                          [Color(0xEE57cc9b), Color(0xff367f60)],
+                        ],
+                        durations: [35000, 19440, 12800, 10000],
+                        heightPercentages: [0.80, 0.83, 0.85, 0.88],
+                        gradientBegin: Alignment.topRight,
+                        gradientEnd: Alignment.bottomLeft,
+                      ),
+                      backgroundColor: const Color(0xff4bae78),
+                      duration: 32000,
+                      waveAmplitude: 0,
+                      heightPercentange: 1,
+                      size: const Size(
+                        double.infinity,
+                        100,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                        // color: Color(0xff4bae78),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0))),
+                    // color: Colors.green,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 16.0),
+                                Text(
+                                  _name,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                Text('$_gender, $_age, $_idNumber',
+                                    style:
+                                        const TextStyle(color: Colors.white)),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 8.0, bottom: 0.0),
+                                  child: Text(
+                                    'GREEN',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24.0),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Card(
+                elevation: 3,
+                margin: EdgeInsets.zero,
+                clipBehavior: Clip.antiAlias,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       color: Colors.black12,
+                    //       blurRadius: 6,
+                    //       offset: Offset(0, 2))
+                    // ],
+                    // borderRadius: BorderRadius.only(
+                    //     bottomLeft: Radius.circular(10.0),
+                    //     bottomRight: Radius.circular(10.0)),
+                  ),
+                  // color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 18.0, bottom: 8.0),
+                                child: Row(
+                                  children: [
+                                    GestureDetector(
+                                      onDoubleTap: _showFAB,
+                                      child: const Text(
+                                        'COVID-19 Vaccination',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14.0),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Wrap(runSpacing: 8.0, children: [
+                                doseMeUp(initialDose),
+                              ]),
+                              const Padding(
+                                padding:
+                                    EdgeInsets.only(top: 18.0, bottom: 8.0),
+                                child: Text(
+                                  'COVID-19 Test',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 14.0),
+                                ),
+                              ),
+                              Row(
+                                children: const [
+                                  FaIcon(
+                                    FontAwesomeIcons.circleMinus,
+                                    size: 18.0,
+                                    color: Color(0xff4bae78),
+                                  ),
+                                  SizedBox(width: 5.0),
+                                  Text(
+                                    'Negative',
+                                    style: TextStyle(color: Color(0xff4bae78)),
+                                  ),
+                                  Spacer(),
+                                  Text('07 Jun 2022 23:59',
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                      ))
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget cardContentBottom() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 28.0, right: 28.0, top: 16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Text(
-                'Healthy and Safe. Please continue to monitor your health condition and stay safe.'),
-          ),
-          const SizedBox(height: 10.0),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                elevation: 0,
-                primary: Colors.transparent,
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20))),
-            child: Ink(
-              decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                      colors: [Color(0xff00c9c1), Color(0xff67e7c8)]),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Container(
-                height: 35,
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(MdiIcons.lineScan),
-                    SizedBox(
-                      width: 10,
+          SizedBox(
+            height: 110,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 110,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 16.0, bottom: 16.0, left: 8.0, right: 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(16.0),
+                                  bottomRight: Radius.circular(16.0),
+                                  topLeft: Radius.circular(16.0),
+                                  bottomLeft: Radius.circular(16.0)),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FaIcon(
+                                FontAwesomeIcons.barcode,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            "Scan Code",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: _buttonFontSize),
+                          )
+                        ],
+                      ),
                     ),
-                    Text(
-                      'Scan Code',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          OutlinedButton(
-            style: ElevatedButton.styleFrom(
-              splashFactory: NoSplash.splashFactory,
-              primary: Colors.white,
-              side: const BorderSide(color: Color(0xff18beb5)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-            ),
-            onPressed: () {},
-            child: Wrap(
-              children: const <Widget>[
-                FaIcon(
-                  FontAwesomeIcons.qrcode,
-                  color: Color(0xff18beb5),
-                  size: 18.0,
+                  ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 110,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 16.0, bottom: 16.0, left: 8.0, right: 8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(16.0),
+                                  bottomRight: Radius.circular(16.0),
+                                  topLeft: Radius.circular(16.0),
+                                  bottomLeft: Radius.circular(16.0)),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FaIcon(
+                                FontAwesomeIcons.qrcode,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            "Health Code",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: _buttonFontSize,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                Text("My Code",
-                    style: TextStyle(color: Color(0xff18beb5), fontSize: 14)),
+                SizedBox(
+                  width: 110,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 16.0, bottom: 14.0, left: 8.0, right: 8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(32.0),
+                                  bottomRight: Radius.circular(32.0),
+                                  topLeft: Radius.circular(32.0),
+                                  bottomLeft: Radius.circular(32.0)),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FaIcon(
+                                FontAwesomeIcons.vial,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            "Antigen Rapid Test",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: _buttonFontSize),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget vacSection() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 28.0, right: 28.0, top: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Vaccination',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-          const SizedBox(height: 20.0),
-          const Text(
-              '''Participate in activities with caution. Please practise safe social distancing.
-                
-Disclaimer: A preliminary assessment of your individual epidemic risk is provided for your reference based on your self-reported information, medical records. border control information, disease-control reported information as well as app-generated information such as Bluetooth proximity and GPS location. Given the complexity in epidemic tracking and assessment, we do not rule out that there maybe factors that turn out to be critical that we have not considered. Hence, please pay close attention to your own physical health and seek medical attention if unsure.
-                
-                ''',
-              style: TextStyle(color: Color(0xff99999b), fontSize: 13.0)),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(16.0),
+                                bottomRight: Radius.circular(16.0),
+                                topLeft: Radius.circular(16.0),
+                                bottomLeft: Radius.circular(16.0)),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.syringe,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "Vaccination Appointment",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: _vacFontSize),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 100,
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(16.0),
+                                bottomRight: Radius.circular(16.0),
+                                topLeft: Radius.circular(16.0),
+                                bottomLeft: Radius.circular(16.0)),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.creditCard,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "Vaccination Certificate",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: _vacFontSize),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 100,
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(16.0),
+                                bottomRight: Radius.circular(16.0),
+                                topLeft: Radius.circular(16.0),
+                                bottomLeft: Radius.circular(16.0)),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.calendar,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "Vaccine ADR Reporting",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: _vacFontSize),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget servicesSection() {
+    return Padding(
+      padding: const EdgeInsets.only(
+          left: 28.0, right: 28.0, top: 16.0, bottom: 26.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Text(
+              'Services',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0)),
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.houseChimneyMedical,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "Home Isolation",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: _serviceFontSize),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 100,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0)),
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.mapLocation,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "Epidemic Map",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: _serviceFontSize),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 100,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0)),
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.bullseye,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "Self-Assessment",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: _serviceFontSize),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0)),
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.message,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "COVID 19 Tips",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: _serviceFontSize),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 100,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0)),
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.tv,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                "COVID-19 in Brunei",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: _serviceFontSize),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 100,
+                          child: Column(
+                            children: const [],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
