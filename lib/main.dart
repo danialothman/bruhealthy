@@ -53,7 +53,7 @@ Color _tipIconColor = const Color(0xff746385);
 Color _bruneiIconColor = const Color(0xfffd7e85);
 
 //Misc
-double _heightSizedBox = 4.0;
+double _heightSizedBox = 6.0;
 Color _textColorOne = Colors.grey;
 Color _cardShadowColor = const Color(0xffe8e8e8);
 
@@ -327,7 +327,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget cardContent() {
     return Padding(
-      padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+      padding: const EdgeInsets.only(left: 24.0, right: 24.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -563,7 +563,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget cardContentBottom() {
     return Padding(
-      padding: const EdgeInsets.only(left: 28.0, right: 28.0, top: 16.0),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -758,7 +758,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget vacSection() {
     return Padding(
-      padding: const EdgeInsets.only(left: 28.0, right: 28.0, top: 16.0),
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -788,8 +788,7 @@ class _MainPageState extends State<MainPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(
-                      width: 70,
+                    Expanded(
                       child: Column(
                         children: [
                           Container(
@@ -824,8 +823,7 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 70,
+                    Expanded(
                       child: Column(
                         children: [
                           Container(
@@ -860,8 +858,7 @@ class _MainPageState extends State<MainPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 70,
+                    Expanded(
                       child: Column(
                         children: [
                           Container(
@@ -909,7 +906,7 @@ class _MainPageState extends State<MainPage> {
   Widget servicesSection() {
     return Padding(
       padding: const EdgeInsets.only(
-          left: 28.0, right: 28.0, top: 16.0, bottom: 26.0),
+          left: 20.0, right: 20.0, top: 16.0, bottom: 26.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -943,8 +940,7 @@ class _MainPageState extends State<MainPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          SizedBox(
-                            width: 70,
+                          Expanded(
                             child: Column(
                               children: [
                                 Container(
@@ -980,8 +976,7 @@ class _MainPageState extends State<MainPage> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            width: 70,
+                          Expanded(
                             child: Column(
                               children: [
                                 Container(
@@ -1018,8 +1013,7 @@ class _MainPageState extends State<MainPage> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            width: 70,
+                          Expanded(
                             child: Column(
                               children: [
                                 Container(
@@ -1064,8 +1058,7 @@ class _MainPageState extends State<MainPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          SizedBox(
-                            width: 70,
+                          Expanded(
                             child: Column(
                               children: [
                                 Container(
@@ -1101,8 +1094,7 @@ class _MainPageState extends State<MainPage> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            width: 70,
+                          Expanded(
                             child: Column(
                               children: [
                                 Container(
@@ -1143,8 +1135,7 @@ class _MainPageState extends State<MainPage> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            width: 70,
+                          Expanded(
                             child: Column(
                               children: const [],
                             ),
