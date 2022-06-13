@@ -4,24 +4,32 @@ import 'package:no_scroll_glow/no_scroll_glow.dart';
 import 'package:squircle/squircle.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
+import 'package:intl/intl.dart';
+
+DateTime now = DateTime.now();
 
 // BottomNavbar
 Color _unselectedIconColor = const Color(0xffdedde3);
 
 // User Profile
-String _name = "Danial Othman";
+String _name = "Hideo Bojima";
 String _gender = "Male";
-String _idNumber = "00****55";
-String _age = "34";
+String _idNumber = "00420420";
+String _age = "58";
+
+// dose
+int initialDose = 3;
 
 // Card Content
+bool idIsVisible = false;
 bool _artTestNegative = true;
 bool _onlyShowLastVac = true;
-String _dateTime = "12 Jun 2022 23:59";
-String _cardCode = "GREEN";
+String _dateTime = DateFormat('dd MMM yyyy HH:mm').format(now).toString();
+List<String> _cardCode = ["GREEN", "YELLOW", "RED", "PURPLE", "BLUE"];
+int _initialCardCode = 0;
 
 // Premise Content
-String _premiseName = "Al Noor";
+String _premiseName = "Al Noor Department Store";
 
 // Bottom Card Section
 double _buttonFontSize = 12.0;
@@ -53,9 +61,6 @@ Color _cardShadowColor = const Color(0xffe8e8e8);
 List<String> ordinals = ['st', 'nd', 'rd', 'th'];
 int ordinalIndex = 0;
 
-// dose
-int initialDose = 3;
-
 void main() {
   runApp(const MyApp());
 }
@@ -74,20 +79,23 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         hoverColor: Colors.transparent,
       ),
-      home: const MyHomePage(),
+      home: const MainPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MainPageState extends State<MainPage> {
+  // BottomNav Selected Icon
   final int _selectedIndex = 2;
+
+  // FAB control
   bool _isVisible = false;
 
   void _showFAB() {
@@ -100,6 +108,100 @@ class _MyHomePageState extends State<MyHomePage> {
         _isVisible = false;
       });
     }
+  }
+
+  // ART Test Control
+  Widget artTestNegative() {
+    return Row(
+      children: [
+        const FaIcon(
+          FontAwesomeIcons.circleMinus,
+          size: 18.0,
+          color: Color(0xff4bae78),
+        ),
+        const SizedBox(width: 5.0),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _artTestNegative = false;
+            });
+          },
+          child: const Text(
+            'Negative',
+            style: TextStyle(color: Color(0xff4bae78)),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget artTestPositive() {
+    return Row(
+      children: [
+        const FaIcon(
+          FontAwesomeIcons.circlePlus,
+          size: 18.0,
+          color: Colors.red,
+        ),
+        const SizedBox(width: 5.0),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _artTestNegative = true;
+            });
+          },
+          child: const Text(
+            'Positive',
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // ID show-hide Control
+  showIdFunc() {
+    return Row(
+      children: [
+        Text(' $_idNumber', style: const TextStyle(color: Colors.white)),
+        const SizedBox(width: 5.0),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              idIsVisible = false;
+            });
+          },
+          child: const FaIcon(
+            FontAwesomeIcons.eye,
+            color: Colors.white,
+            size: 12.0,
+          ),
+        )
+      ],
+    );
+  }
+
+  hideIdFunc(String id) {
+    String hiderPlaceholder = "****";
+    String censoredId = id.replaceRange(2, id.length - 2, hiderPlaceholder);
+    return Row(
+      children: [
+        Text(' $censoredId', style: const TextStyle(color: Colors.white)),
+        const SizedBox(width: 5.0),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              idIsVisible = true;
+            });
+          },
+          child: const FaIcon(
+            FontAwesomeIcons.eyeSlash,
+            color: Colors.white,
+            size: 12.0,
+          ),
+        )
+      ],
+    );
   }
 
   @override
@@ -198,6 +300,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // Dose Control
   void _moreDose() {
     setState(() {
       initialDose++;
@@ -296,26 +399,40 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 Row(
                                   children: [
-                                    Text('$_gender, $_age, $_idNumber',
+                                    Text('$_gender, $_age,',
                                         style: const TextStyle(
                                             color: Colors.white)),
-                                    const SizedBox(width: 5.0),
-                                    const FaIcon(
-                                      FontAwesomeIcons.eyeSlash,
-                                      color: Colors.white,
-                                      size: 12.0,
-                                    ),
+                                    ((() {
+                                      // immediate anonymous function
+                                      if (idIsVisible) {
+                                        return showIdFunc();
+                                      } else if (!idIsVisible) {
+                                        return hideIdFunc(_idNumber);
+                                      }
+                                    })()),
                                   ],
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 8.0, bottom: 0.0),
-                                  child: Text(
-                                    _cardCode,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        if (_initialCardCode ==
+                                            _cardCode.length - 1) {
+                                          _initialCardCode = 0;
+                                        } else {
+                                          _initialCardCode++;
+                                        }
+                                      });
+                                    },
+                                    child: Text(
+                                      _cardCode[_initialCardCode],
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24.0),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -1047,12 +1164,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _nextPage() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const SecondRoute()));
+        context, MaterialPageRoute(builder: (context) => const PremisePage()));
   }
 }
 
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({Key? key}) : super(key: key);
+class PremisePage extends StatefulWidget {
+  const PremisePage({Key? key}) : super(key: key);
+
+  @override
+  State<PremisePage> createState() => _PremisePageState();
+}
+
+class _PremisePageState extends State<PremisePage> {
+  updatedDateTime() {
+    now = DateTime.now();
+    String _enteredDateTime =
+        DateFormat('dd MMM yyyy hh:mm a').format(now).toString();
+    return _enteredDateTime;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1066,183 +1195,13 @@ class SecondRoute extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Center(
+      bottomNavigationBar: SizedBox(
+        height: 60,
         child: Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                child: Stack(
-                  children: [
-                    Card(
-                      elevation: 0,
-                      margin: EdgeInsets.zero,
-                      clipBehavior: Clip.antiAlias,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10.0),
-                            bottomRight: Radius.circular(10.0)),
-                      ),
-
-                      // color: Colors.green,
-                      child: WaveWidget(
-                        config: CustomConfig(
-                          gradients: const [
-                            [Color(0xEE4bae78), Color(0xff357b54)],
-                            [Color(0xEE4cb27a), Color(0xff2b6545)],
-                            [Color(0xEE6dffc2), Color(0xff2a6143)],
-                            [Color(0xEE57cc9b), Color(0xff367f60)],
-                          ],
-                          durations: [35000, 19440, 12800, 10000],
-                          heightPercentages: [0.80, 0.83, 0.85, 0.88],
-                          gradientBegin: Alignment.topRight,
-                          gradientEnd: Alignment.bottomLeft,
-                        ),
-                        backgroundColor: const Color(0xff4bae78),
-                        duration: 32000,
-                        waveAmplitude: 0,
-                        heightPercentange: 1,
-                        size: const Size(
-                          double.infinity,
-                          200,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        // color: Color(0xff4bae78),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            topRight: Radius.circular(10.0),
-                            bottomLeft: Radius.circular(10.0),
-                            bottomRight: Radius.circular(10.0)),
-                      ),
-                      // color: Colors.green,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Column(
-                                children: [
-                                  const SizedBox(height: 16.0),
-                                  const FaIcon(
-                                    FontAwesomeIcons.circleArrowUp,
-                                    size: 60,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  const Text(
-                                    "Welcome to",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  Text(
-                                    _premiseName,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24.0),
-                                  ),
-                                  const SizedBox(height: 35),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        "Entered:",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const Spacer(),
-                                      Text(
-                                        _dateTime,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 5.0,
-                        ),
-                      ],
-                    ),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                children: [
-                                  const SizedBox(height: 10.0),
-                                  CircleAvatar(
-                                    radius: 24,
-                                    backgroundColor: _artIconColor,
-                                    child: FaIcon(
-                                      FontAwesomeIcons.userShield,
-                                      color: _bottomInnerIconColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      _name,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(height: 5.0),
-                                    Text(
-                                      "Myself | $_idNumber",
-                                      style: const TextStyle(
-                                          color: Colors.grey, fontSize: 12.0),
-                                    ),
-                                    const SizedBox(height: 5.0),
-                                    doseMeUpAll(initialDose)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Spacer(),
               OutlinedButton(
                 style: ElevatedButton.styleFrom(
                   splashFactory: NoSplash.splashFactory,
@@ -1271,10 +1230,199 @@ class SecondRoute extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 14.0,
-              )
             ],
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                  child: Stack(
+                    children: [
+                      Card(
+                        elevation: 0,
+                        margin: EdgeInsets.zero,
+                        clipBehavior: Clip.antiAlias,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10.0),
+                              bottomRight: Radius.circular(10.0)),
+                        ),
+
+                        // color: Colors.green,
+                        child: WaveWidget(
+                          config: CustomConfig(
+                            gradients: const [
+                              [Color(0xEE4bae78), Color(0xff357b54)],
+                              [Color(0xEE4cb27a), Color(0xff2b6545)],
+                              [Color(0xEE6dffc2), Color(0xff2a6143)],
+                              [Color(0xEE57cc9b), Color(0xff367f60)],
+                            ],
+                            durations: [35000, 19440, 12800, 10000],
+                            heightPercentages: [0.80, 0.83, 0.85, 0.88],
+                            gradientBegin: Alignment.topRight,
+                            gradientEnd: Alignment.bottomLeft,
+                          ),
+                          backgroundColor: const Color(0xff4bae78),
+                          duration: 32000,
+                          waveAmplitude: 0,
+                          heightPercentange: 1,
+                          size: const Size(
+                            double.infinity,
+                            200,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                          // color: Color(0xff4bae78),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.0),
+                              topRight: Radius.circular(10.0),
+                              bottomLeft: Radius.circular(10.0),
+                              bottomRight: Radius.circular(10.0)),
+                        ),
+                        // color: Colors.green,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 16.0, right: 16.0),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    const SizedBox(height: 16.0),
+                                    const FaIcon(
+                                      FontAwesomeIcons.circleArrowUp,
+                                      size: 60,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(height: 16.0),
+                                    const Text(
+                                      "Welcome to",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      _premiseName,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24.0),
+                                    ),
+                                    const SizedBox(height: 35),
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          "Entered:",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          updatedDateTime(),
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: _cardShadowColor,
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                      ),
+                      child: Card(
+                        //working
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 10.0),
+                                    CircleAvatar(
+                                      radius: 24,
+                                      backgroundColor: _artIconColor,
+                                      child: FaIcon(
+                                        FontAwesomeIcons.userShield,
+                                        color: _bottomInnerIconColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        _name,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 5.0),
+                                      Text(
+                                        "Myself | $_idNumber",
+                                        style: const TextStyle(
+                                            color: Colors.grey, fontSize: 12.0),
+                                      ),
+                                      const SizedBox(height: 5.0),
+                                      doseMeUpAll(initialDose)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -1327,38 +1475,4 @@ String ordinal(int number) {
     default:
       return 'th';
   }
-}
-
-Widget artTestNegative() {
-  return Row(
-    children: const [
-      FaIcon(
-        FontAwesomeIcons.circleMinus,
-        size: 18.0,
-        color: Color(0xff4bae78),
-      ),
-      SizedBox(width: 5.0),
-      Text(
-        'Negative',
-        style: TextStyle(color: Color(0xff4bae78)),
-      ),
-    ],
-  );
-}
-
-Widget artTestPositive() {
-  return Row(
-    children: const [
-      FaIcon(
-        FontAwesomeIcons.circlePlus,
-        size: 18.0,
-        color: Colors.red,
-      ),
-      SizedBox(width: 5.0),
-      Text(
-        'Positive',
-        style: TextStyle(color: Colors.red),
-      ),
-    ],
-  );
 }
