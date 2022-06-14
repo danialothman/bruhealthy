@@ -105,6 +105,7 @@ Color _bruneiIconColor = const Color(0xfffd7e85);
 double _heightSizedBox = 6.0;
 Color _textColorOne = Colors.grey;
 Color _cardShadowColor = const Color(0xffe8e8e8);
+var pi = 3.14; // for icon rotation
 
 // ordinals
 List<String> ordinals = ['st', 'nd', 'rd', 'th'];
@@ -801,10 +802,13 @@ class _MainPageState extends State<MainPage> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: FaIcon(
-                                  FontAwesomeIcons.vial,
-                                  color: _bottomInnerIconColor,
-                                  size: 20.0,
+                                child: Transform.rotate(
+                                  angle: 270 * pi / 180,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.vial,
+                                    color: _bottomInnerIconColor,
+                                    size: 20.0,
+                                  ),
                                 ),
                               ),
                             ),
