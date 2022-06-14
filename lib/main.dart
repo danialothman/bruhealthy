@@ -29,7 +29,7 @@ List<String> _cardCode = ["GREEN", "YELLOW", "RED", "PURPLE", "BLUE"];
 int _initialCardCode = 0;
 
 // Premise Content
-String _premiseName = "Al Noor Department Store";
+String _premiseName = "Bojima Productions Office";
 
 // Bottom Card Section
 double _buttonFontSize = 12.0;
@@ -37,6 +37,55 @@ Color _bottomInnerIconColor = const Color(0xff0fc1a1);
 Color _scanCodeIconColor = const Color(0xffe7faf8);
 Color _healthCodeIconColor = const Color(0xffe7faf8);
 Color _artIconColor = const Color(0xffe7faf8);
+
+// Wave Color
+List<List<Color>> _initialWaveColor = _greenWave;
+Color _initialBackground = _greenBackground;
+
+//----GREEN
+List<List<Color>> _greenWave = const [
+  [Color(0xEE4bae78), Color(0xff357b54)],
+  [Color(0xEE4cb27a), Color(0xff2b6545)],
+  [Color(0xEE6dffc2), Color(0xff2a6143)],
+  [Color(0xEE57cc9b), Color(0xff367f60)],
+];
+Color _greenBackground = const Color(0xff4bae78);
+
+//----YELLOW
+List<List<Color>> _yellowWave = const [
+  [Color(0xeeae804b), Color(0xff7b5835)],
+  [Color(0xeeb27f4c), Color(0xff65452b)],
+  [Color(0xeeffbb6d), Color(0xff61412a)],
+  [Color(0xeecc9557), Color(0xff7a4e37)],
+];
+Color _yellowBackground = const Color(0xffffa221);
+
+//----RED
+List<List<Color>> _redWave = const [
+  [Color(0xeeae4b4b), Color(0xff7b3535)],
+  [Color(0xeeb24c4c), Color(0xff652b2b)],
+  [Color(0xeeff6d6d), Color(0xff612a2a)],
+  [Color(0xeecc5757), Color(0xff7f3636)],
+];
+Color _redBackground = const Color(0xffe76464);
+
+//----BLUE
+List<List<Color>> _blueWave = const [
+  [Color(0xee4b6eae), Color(0xff35497b)],
+  [Color(0xee4c75b2), Color(0xff2b4465)],
+  [Color(0xee6dacff), Color(0xff2a4661)],
+  [Color(0xee5786cc), Color(0xff36507f)],
+];
+Color _blueBackground = const Color(0xff4b8bae);
+
+//----PURPLE
+List<List<Color>> _purpleWave = const [
+  [Color(0xee936cff), Color(0xff46357b)],
+  [Color(0xeeaf83ff), Color(0xff382b65)],
+  [Color(0xee7c6dff), Color(0xff3a2a61)],
+  [Color(0xee7857cc), Color(0xff46367f)],
+];
+Color _purpleBackground = const Color(0xff7e4bae);
 
 // Vaccination Section
 double _vacFontSize = 12.0;
@@ -62,11 +111,11 @@ List<String> ordinals = ['st', 'nd', 'rd', 'th'];
 int ordinalIndex = 0;
 
 void main() {
-  runApp(const MyApp());
+  runApp(const BruHealthyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class BruHealthyApp extends StatelessWidget {
+  const BruHealthyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -356,18 +405,13 @@ class _MainPageState extends State<MainPage> {
                     // color: Colors.green,
                     child: WaveWidget(
                       config: CustomConfig(
-                        gradients: const [
-                          [Color(0xEE4bae78), Color(0xff357b54)],
-                          [Color(0xEE4cb27a), Color(0xff2b6545)],
-                          [Color(0xEE6dffc2), Color(0xff2a6143)],
-                          [Color(0xEE57cc9b), Color(0xff367f60)],
-                        ],
+                        gradients: _initialWaveColor, //moose
                         durations: [35000, 19440, 12800, 10000],
                         heightPercentages: [0.80, 0.83, 0.85, 0.88],
                         gradientBegin: Alignment.topRight,
                         gradientEnd: Alignment.bottomLeft,
                       ),
-                      backgroundColor: const Color(0xff4bae78), // Card Color
+                      backgroundColor: _initialBackground, // Card Color
                       duration: 32000,
                       waveAmplitude: 0,
                       heightPercentange: 1,
@@ -424,6 +468,34 @@ class _MainPageState extends State<MainPage> {
                                         } else {
                                           _initialCardCode++;
                                         }
+                                        // working
+                                        if (_initialCardCode == 0) {
+                                          _initialWaveColor = _greenWave;
+                                          _initialBackground = _greenBackground;
+                                          _artTestNegative = true;
+                                        }
+                                        if (_initialCardCode == 1) {
+                                          _initialWaveColor = _yellowWave;
+                                          _initialBackground =
+                                              _yellowBackground;
+                                          _artTestNegative = true;
+                                        }
+                                        if (_initialCardCode == 2) {
+                                          _initialWaveColor = _redWave;
+                                          _initialBackground = _redBackground;
+                                          _artTestNegative = true;
+                                        }
+                                        if (_initialCardCode == 3) {
+                                          _initialWaveColor = _purpleWave;
+                                          _initialBackground =
+                                              _purpleBackground;
+                                          _artTestNegative = false;
+                                        }
+                                        if (_initialCardCode == 4) {
+                                          _initialWaveColor = _blueWave;
+                                          _initialBackground = _blueBackground;
+                                          _artTestNegative = true;
+                                        }
                                       });
                                     },
                                     child: Text(
@@ -445,16 +517,16 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
               Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),
                   ),
                   boxShadow: [
                     BoxShadow(
                       spreadRadius: 0,
-                      color: Color(0xff4bae78), // Card Color
-                      offset: Offset(0.0, 3),
+                      color: _initialBackground, // Card Color
+                      offset: const Offset(0.0, 3),
                     ),
                   ],
                 ),
@@ -1353,7 +1425,6 @@ class _PremisePageState extends State<PremisePage> {
                         ],
                       ),
                       child: Card(
-                        //working
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
