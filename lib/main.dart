@@ -254,6 +254,43 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  // Alert Dialog - Change Content
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Change Content'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Name'),
+                TextField(),
+                Text('Gender'),
+                TextField(),
+                Text('Age'),
+                TextField(),
+                Text('ID Number'),
+                TextField(),
+                Text('Premise'),
+                TextField(),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Approve'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -406,7 +443,7 @@ class _MainPageState extends State<MainPage> {
                     // color: Colors.green,
                     child: WaveWidget(
                       config: CustomConfig(
-                        gradients: _initialWaveColor, //moose
+                        gradients: _initialWaveColor,
                         durations: [35000, 19440, 12800, 10000],
                         heightPercentages: [0.80, 0.83, 0.85, 0.88],
                         gradientBegin: Alignment.topRight,
@@ -469,7 +506,6 @@ class _MainPageState extends State<MainPage> {
                                         } else {
                                           _initialCardCode++;
                                         }
-                                        // working
                                         if (_initialCardCode == 0) {
                                           _initialWaveColor = _greenWave;
                                           _initialBackground = _greenBackground;
@@ -780,45 +816,48 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ],
                     ),
-                    child: Card(
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16.0, bottom: 14.0, left: 8.0, right: 8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: _artIconColor,
-                                borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(32.0),
-                                    bottomRight: Radius.circular(32.0),
-                                    topLeft: Radius.circular(32.0),
-                                    bottomLeft: Radius.circular(32.0)),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Transform.rotate(
-                                  angle: 270 * pi / 180,
-                                  child: FaIcon(
-                                    FontAwesomeIcons.vial,
-                                    color: _bottomInnerIconColor,
-                                    size: 20.0,
+                    child: GestureDetector(
+                      onTap: _showMyDialog,
+                      child: Card(
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 16.0, bottom: 14.0, left: 8.0, right: 8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: _artIconColor,
+                                  borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(32.0),
+                                      bottomRight: Radius.circular(32.0),
+                                      topLeft: Radius.circular(32.0),
+                                      bottomLeft: Radius.circular(32.0)),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Transform.rotate(
+                                    angle: 270 * pi / 180,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.vial,
+                                      color: _bottomInnerIconColor,
+                                      size: 20.0,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const Spacer(),
-                            Text(
-                              "Antigen Rapid Test",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: _buttonFontSize),
-                            )
-                          ],
+                              const Spacer(),
+                              Text(
+                                "Antigen Rapid Test",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: _buttonFontSize),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
