@@ -1367,18 +1367,13 @@ class _PremisePageState extends State<PremisePage> {
                         // color: Colors.green,
                         child: WaveWidget(
                           config: CustomConfig(
-                            gradients: const [
-                              [Color(0xEE4bae78), Color(0xff357b54)],
-                              [Color(0xEE4cb27a), Color(0xff2b6545)],
-                              [Color(0xEE6dffc2), Color(0xff2a6143)],
-                              [Color(0xEE57cc9b), Color(0xff367f60)],
-                            ],
+                            gradients: _greenWave,
                             durations: [35000, 19440, 12800, 10000],
                             heightPercentages: [0.80, 0.83, 0.85, 0.88],
                             gradientBegin: Alignment.topRight,
                             gradientEnd: Alignment.bottomLeft,
                           ),
-                          backgroundColor: const Color(0xff4bae78),
+                          backgroundColor: _greenBackground,
                           duration: 32000,
                           waveAmplitude: 0,
                           heightPercentange: 1,
