@@ -1,3 +1,3 @@
-# bruhealthy
+# BruHealthy App
 
-A copy of Bruhealth App UI, for education purpose.
+A copy of Brunei's BruHealth App UI, for education purpose.
