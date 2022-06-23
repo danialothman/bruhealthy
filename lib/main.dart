@@ -142,6 +142,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
   // BottomNav Selected Icon
   final int _selectedIndex = 2;
 
