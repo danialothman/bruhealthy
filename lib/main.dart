@@ -142,7 +142,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   // BottomNav Selected Icon
   final int _selectedIndex = 2;
 
@@ -1312,7 +1311,7 @@ class _PremisePageState extends State<PremisePage> {
               OutlinedButton(
                 style: ElevatedButton.styleFrom(
                   splashFactory: NoSplash.splashFactory,
-                  primary: Colors.white,
+                  backgroundColor: Colors.white,
                   side: const BorderSide(color: Color(0xff18beb5)),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
