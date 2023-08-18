@@ -2,7 +2,7 @@
 
 Built with Flutter.
 
-[![Watch the video](https://img.youtube.com/vi/izPFw6mSrMo/default.jpg)](https://youtu.be/izPFw6mSrMo)
+https://github.com/danialothman/bruhealthy/assets/10879981/3b95fbb2-94bb-4500-8063-6572c77cfa06
 
 <table>
 <tr>
