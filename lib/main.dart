@@ -5,111 +5,7 @@ import 'package:squircle/squircle.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:intl/intl.dart';
-
-DateTime now = DateTime.now();
-
-// BottomNavbar
-Color _unselectedIconColor = const Color(0xffdedde3);
-
-// User Profile
-String _name = "Hideo Bojima";
-String _gender = "Male";
-String _idNumber = "00420420";
-String _age = "58";
-
-// dose
-int initialDose = 3;
-
-// Card Content
-bool idIsVisible = false;
-bool _artTestNegative = true;
-bool _onlyShowLastVac = true;
-String _dateTime = DateFormat('dd MMM yyyy HH:mm').format(now).toString();
-List<String> _cardCode = ["GREEN", "YELLOW", "RED", "PURPLE", "BLUE"];
-int _initialCardCode = 0;
-
-// Premise Content
-String _premiseName = "Bojima Productions Office";
-
-// Bottom Card Section
-double _buttonFontSize = 12.0;
-Color _bottomInnerIconColor = const Color(0xff0fc1a1);
-Color _scanCodeIconColor = const Color(0xffe7faf8);
-Color _healthCodeIconColor = const Color(0xffe7faf8);
-Color _artIconColor = const Color(0xffe7faf8);
-
-// Wave Color
-List<List<Color>> _initialWaveColor = _greenWave;
-Color _initialBackground = _greenBackground;
-
-//----GREEN
-List<List<Color>> _greenWave = const [
-  [Color(0xEE4bae78), Color(0xff357b54)],
-  [Color(0xEE4cb27a), Color(0xff2b6545)],
-  [Color(0xEE6dffc2), Color(0xff2a6143)],
-  [Color(0xEE57cc9b), Color(0xff367f60)],
-];
-Color _greenBackground = const Color(0xff4bae78);
-
-//----YELLOW
-List<List<Color>> _yellowWave = const [
-  [Color(0xeeae804b), Color(0xff7b5835)],
-  [Color(0xeeb27f4c), Color(0xff65452b)],
-  [Color(0xeeffbb6d), Color(0xff61412a)],
-  [Color(0xeecc9557), Color(0xff7a4e37)],
-];
-Color _yellowBackground = const Color(0xffffa221);
-
-//----RED
-List<List<Color>> _redWave = const [
-  [Color(0xeeae4b4b), Color(0xff7b3535)],
-  [Color(0xeeb24c4c), Color(0xff652b2b)],
-  [Color(0xeeff6d6d), Color(0xff612a2a)],
-  [Color(0xeecc5757), Color(0xff7f3636)],
-];
-Color _redBackground = const Color(0xffe76464);
-
-//----BLUE
-List<List<Color>> _blueWave = const [
-  [Color(0xee4b6eae), Color(0xff35497b)],
-  [Color(0xee4c75b2), Color(0xff2b4465)],
-  [Color(0xee6dacff), Color(0xff2a4661)],
-  [Color(0xee5786cc), Color(0xff36507f)],
-];
-Color _blueBackground = const Color(0xff4b8bae);
-
-//----PURPLE
-List<List<Color>> _purpleWave = const [
-  [Color(0xee936cff), Color(0xff46357b)],
-  [Color(0xeeaf83ff), Color(0xff382b65)],
-  [Color(0xee7c6dff), Color(0xff3a2a61)],
-  [Color(0xee7857cc), Color(0xff46367f)],
-];
-Color _purpleBackground = const Color(0xff7e4bae);
-
-// Vaccination Section
-double _vacFontSize = 12.0;
-Color _appointmentIconColor = const Color(0xff2fc2bc);
-Color _certificateIconColor = const Color(0xff746385);
-Color _reportingIconColor = const Color(0xfffd7e85);
-
-// Services Section
-double _serviceFontSize = 12.0;
-Color _homeIsoIconColor = const Color(0xff76a9ea);
-Color _epidemicMapIconColor = const Color(0xfffbc251);
-Color _selfAssessIconColor = const Color(0xff2fc2bc);
-Color _tipIconColor = const Color(0xff746385);
-Color _bruneiIconColor = const Color(0xfffd7e85);
-
-//Misc
-double _heightSizedBox = 6.0;
-Color _textColorOne = Colors.grey;
-Color _cardShadowColor = const Color(0xffe8e8e8);
-var pi = 3.14; // for icon rotation
-
-// ordinals
-List<String> ordinals = ['st', 'nd', 'rd', 'th'];
-int ordinalIndex = 0;
+import 'constants.dart';
 
 void main() {
   runApp(const BruHealthyApp());
@@ -173,7 +69,7 @@ class _MainPageState extends State<MainPage> {
         GestureDetector(
           onTap: () {
             setState(() {
-              _artTestNegative = false;
+              artTestNegativeBool = false;
             });
           },
           child: const Text(
@@ -197,7 +93,7 @@ class _MainPageState extends State<MainPage> {
         GestureDetector(
           onTap: () {
             setState(() {
-              _artTestNegative = true;
+              artTestNegativeBool = true;
             });
           },
           child: const Text(
@@ -213,7 +109,7 @@ class _MainPageState extends State<MainPage> {
   showIdFunc() {
     return Row(
       children: [
-        Text(' $_idNumber', style: const TextStyle(color: Colors.white)),
+        Text(' $idNumber', style: const TextStyle(color: Colors.white)),
         const SizedBox(width: 5.0),
         GestureDetector(
           onTap: () {
@@ -306,7 +202,7 @@ class _MainPageState extends State<MainPage> {
                 icon: FaIcon(
                   FontAwesomeIcons.house,
                   size: 16,
-                  color: _unselectedIconColor,
+                  color: unselectedIconColor,
                 ),
                 label: 'Home',
                 backgroundColor: const Color(0xff170626)),
@@ -314,7 +210,7 @@ class _MainPageState extends State<MainPage> {
                 icon: FaIcon(
                   FontAwesomeIcons.solidCalendar,
                   size: 16,
-                  color: _unselectedIconColor,
+                  color: unselectedIconColor,
                 ),
                 label: 'Plan',
                 backgroundColor: const Color(0xff170626)),
@@ -329,7 +225,7 @@ class _MainPageState extends State<MainPage> {
                 icon: FaIcon(
                   FontAwesomeIcons.solidFileLines,
                   size: 16,
-                  color: _unselectedIconColor,
+                  color: unselectedIconColor,
                 ),
                 label: 'Article',
                 backgroundColor: const Color(0xff170626)),
@@ -337,7 +233,7 @@ class _MainPageState extends State<MainPage> {
                 icon: FaIcon(
                   FontAwesomeIcons.solidUser,
                   size: 16,
-                  color: _unselectedIconColor,
+                  color: unselectedIconColor,
                 ),
                 label: 'Me',
                 backgroundColor: const Color(0xff170626)),
@@ -404,8 +300,8 @@ class _MainPageState extends State<MainPage> {
     return Wrap(
       runSpacing: 10,
       children: [
-        if (_onlyShowLastVac) (doseCookie(initialDose, ordinalIndex)),
-        if (!_onlyShowLastVac)
+        if (onlyShowLastVac) (doseCookie(initialDose, ordinalIndex)),
+        if (!onlyShowLastVac)
           for (int i = 0; i < numberOfDoses; i++)
             doseCookie(i + 1, ordinalIndex),
       ],
@@ -443,13 +339,13 @@ class _MainPageState extends State<MainPage> {
                     // color: Colors.green,
                     child: WaveWidget(
                       config: CustomConfig(
-                        gradients: _initialWaveColor,
+                        gradients: initialWaveColor,
                         durations: [35000, 19440, 12800, 10000],
                         heightPercentages: [0.80, 0.83, 0.85, 0.88],
                         gradientBegin: Alignment.topRight,
                         gradientEnd: Alignment.bottomLeft,
                       ),
-                      backgroundColor: _initialBackground, // Card Color
+                      backgroundColor: initialBackground, // Card Color
                       duration: 32000,
                       waveAmplitude: 0,
                       heightPercentange: 1,
@@ -476,12 +372,12 @@ class _MainPageState extends State<MainPage> {
                               children: [
                                 const SizedBox(height: 16.0),
                                 Text(
-                                  _name,
+                                  name,
                                   style: const TextStyle(color: Colors.white),
                                 ),
                                 Row(
                                   children: [
-                                    Text('$_gender, $_age,',
+                                    Text('$gender, $age,',
                                         style: const TextStyle(
                                             color: Colors.white)),
                                     ((() {
@@ -489,7 +385,7 @@ class _MainPageState extends State<MainPage> {
                                       if (idIsVisible) {
                                         return showIdFunc();
                                       } else if (!idIsVisible) {
-                                        return hideIdFunc(_idNumber);
+                                        return hideIdFunc(idNumber);
                                       }
                                     })()),
                                   ],
@@ -500,43 +396,41 @@ class _MainPageState extends State<MainPage> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        if (_initialCardCode ==
-                                            _cardCode.length - 1) {
-                                          _initialCardCode = 0;
+                                        if (initialCardCode ==
+                                            cardCode.length - 1) {
+                                          initialCardCode = 0;
                                         } else {
-                                          _initialCardCode++;
+                                          initialCardCode++;
                                         }
-                                        if (_initialCardCode == 0) {
-                                          _initialWaveColor = _greenWave;
-                                          _initialBackground = _greenBackground;
-                                          _artTestNegative = true;
+                                        if (initialCardCode == 0) {
+                                          initialWaveColor = greenWave;
+                                          initialBackground = greenBackground;
+                                          artTestNegativeBool = true;
                                         }
-                                        if (_initialCardCode == 1) {
-                                          _initialWaveColor = _yellowWave;
-                                          _initialBackground =
-                                              _yellowBackground;
-                                          _artTestNegative = true;
+                                        if (initialCardCode == 1) {
+                                          initialWaveColor = yellowWave;
+                                          initialBackground = yellowBackground;
+                                          artTestNegativeBool = true;
                                         }
-                                        if (_initialCardCode == 2) {
-                                          _initialWaveColor = _redWave;
-                                          _initialBackground = _redBackground;
-                                          _artTestNegative = true;
+                                        if (initialCardCode == 2) {
+                                          initialWaveColor = redWave;
+                                          initialBackground = redBackground;
+                                          artTestNegativeBool = true;
                                         }
-                                        if (_initialCardCode == 3) {
-                                          _initialWaveColor = _purpleWave;
-                                          _initialBackground =
-                                              _purpleBackground;
-                                          _artTestNegative = false;
+                                        if (initialCardCode == 3) {
+                                          initialWaveColor = purpleWave;
+                                          initialBackground = purpleBackground;
+                                          artTestNegativeBool = false;
                                         }
-                                        if (_initialCardCode == 4) {
-                                          _initialWaveColor = _blueWave;
-                                          _initialBackground = _blueBackground;
-                                          _artTestNegative = true;
+                                        if (initialCardCode == 4) {
+                                          initialWaveColor = blueWave;
+                                          initialBackground = blueBackground;
+                                          artTestNegativeBool = true;
                                         }
                                       });
                                     },
                                     child: Text(
-                                      _cardCode[_initialCardCode],
+                                      cardCode[initialCardCode],
                                       style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -562,7 +456,7 @@ class _MainPageState extends State<MainPage> {
                   boxShadow: [
                     BoxShadow(
                       spreadRadius: 0,
-                      color: _initialBackground, // Card Color
+                      color: initialBackground, // Card Color
                       offset: const Offset(0.0, 3),
                     ),
                   ],
@@ -640,13 +534,13 @@ class _MainPageState extends State<MainPage> {
                               ),
                               Row(
                                 children: [
-                                  if (_artTestNegative) ...[
+                                  if (artTestNegativeBool) ...[
                                     artTestNegative(),
                                   ] else ...[
                                     artTestPositive(),
                                   ],
                                   const Spacer(),
-                                  Text(_dateTime,
+                                  Text(dateTime,
                                       style: const TextStyle(
                                         color: Colors.grey,
                                       ))
@@ -687,7 +581,7 @@ class _MainPageState extends State<MainPage> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: _cardShadowColor,
+                          color: cardShadowColor,
                           blurRadius: 5.0,
                         ),
                       ],
@@ -709,7 +603,7 @@ class _MainPageState extends State<MainPage> {
                                 height: 32,
                                 width: 32,
                                 decoration: BoxDecoration(
-                                  color: _bruneiIconColor,
+                                  color: bruneiIconColor,
                                   borderRadius: const BorderRadius.only(
                                       topRight: Radius.circular(12.0),
                                       bottomRight: Radius.circular(12.0),
@@ -718,15 +612,15 @@ class _MainPageState extends State<MainPage> {
                                 ),
                                 child: Material(
                                   elevation: 1,
-                                  color: _scanCodeIconColor,
+                                  color: scanCodeIconColor,
                                   shape: SquircleBorder(
                                     side: BorderSide(
-                                        color: _scanCodeIconColor, width: 2),
+                                        color: scanCodeIconColor, width: 2),
                                   ),
                                   child: Center(
                                     child: FaIcon(
                                       FontAwesomeIcons.barcode,
-                                      color: _bottomInnerIconColor,
+                                      color: bottomInnerIconColor,
                                       size: 20,
                                     ),
                                   ),
@@ -736,7 +630,7 @@ class _MainPageState extends State<MainPage> {
                               Text(
                                 "Scan Code",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: _buttonFontSize),
+                                style: TextStyle(fontSize: buttonFontSize),
                               )
                             ],
                           ),
@@ -750,7 +644,7 @@ class _MainPageState extends State<MainPage> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: _cardShadowColor,
+                          color: cardShadowColor,
                           blurRadius: 5.0,
                         ),
                       ],
@@ -769,7 +663,7 @@ class _MainPageState extends State<MainPage> {
                               height: 32,
                               width: 32,
                               decoration: BoxDecoration(
-                                color: _bruneiIconColor,
+                                color: bruneiIconColor,
                                 borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(12.0),
                                     bottomRight: Radius.circular(12.0),
@@ -778,15 +672,15 @@ class _MainPageState extends State<MainPage> {
                               ),
                               child: Material(
                                 elevation: 1,
-                                color: _healthCodeIconColor,
+                                color: healthCodeIconColor,
                                 shape: SquircleBorder(
                                   side: BorderSide(
-                                      color: _healthCodeIconColor, width: 2),
+                                      color: healthCodeIconColor, width: 2),
                                 ),
                                 child: Center(
                                   child: FaIcon(
                                     FontAwesomeIcons.qrcode,
-                                    color: _bottomInnerIconColor,
+                                    color: bottomInnerIconColor,
                                     size: 20,
                                   ),
                                 ),
@@ -797,7 +691,7 @@ class _MainPageState extends State<MainPage> {
                               "Health Code",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: _buttonFontSize,
+                                fontSize: buttonFontSize,
                               ),
                             )
                           ],
@@ -811,7 +705,7 @@ class _MainPageState extends State<MainPage> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: _cardShadowColor,
+                          color: cardShadowColor,
                           blurRadius: 5.0,
                         ),
                       ],
@@ -831,7 +725,7 @@ class _MainPageState extends State<MainPage> {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                  color: _artIconColor,
+                                  color: artIconColor,
                                   borderRadius: const BorderRadius.only(
                                       topRight: Radius.circular(32.0),
                                       bottomRight: Radius.circular(32.0),
@@ -844,7 +738,7 @@ class _MainPageState extends State<MainPage> {
                                     angle: 270 * pi / 180,
                                     child: FaIcon(
                                       FontAwesomeIcons.vial,
-                                      color: _bottomInnerIconColor,
+                                      color: bottomInnerIconColor,
                                       size: 20.0,
                                     ),
                                   ),
@@ -854,7 +748,7 @@ class _MainPageState extends State<MainPage> {
                               Text(
                                 "Antigen Rapid Test",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: _buttonFontSize),
+                                style: TextStyle(fontSize: buttonFontSize),
                               )
                             ],
                           ),
@@ -888,7 +782,7 @@ class _MainPageState extends State<MainPage> {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: _cardShadowColor,
+                  color: cardShadowColor,
                   blurRadius: 5.0,
                 ),
               ],
@@ -914,10 +808,10 @@ class _MainPageState extends State<MainPage> {
                             ),
                             child: Material(
                               elevation: 1,
-                              color: _appointmentIconColor,
+                              color: appointmentIconColor,
                               shape: SquircleBorder(
                                 side: BorderSide(
-                                    color: _appointmentIconColor, width: 1.9),
+                                    color: appointmentIconColor, width: 1.9),
                               ),
                               child: const Center(
                                 child: FaIcon(
@@ -928,12 +822,12 @@ class _MainPageState extends State<MainPage> {
                               ),
                             ), // Squircle
                           ),
-                          SizedBox(height: _heightSizedBox),
+                          SizedBox(height: heightSizedBox),
                           Text(
                             "Vaccination Appointment",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: _vacFontSize, color: _textColorOne),
+                                fontSize: vacFontSize, color: textColorOne),
                           )
                         ],
                       ),
@@ -949,10 +843,10 @@ class _MainPageState extends State<MainPage> {
                             ),
                             child: Material(
                               elevation: 1,
-                              color: _certificateIconColor,
+                              color: certificateIconColor,
                               shape: SquircleBorder(
                                 side: BorderSide(
-                                    color: _certificateIconColor, width: 1.9),
+                                    color: certificateIconColor, width: 1.9),
                               ),
                               child: const Center(
                                 child: FaIcon(
@@ -963,12 +857,12 @@ class _MainPageState extends State<MainPage> {
                               ),
                             ), // Squircle
                           ),
-                          SizedBox(height: _heightSizedBox),
+                          SizedBox(height: heightSizedBox),
                           Text(
                             "Vaccination Certificate",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: _vacFontSize, color: _textColorOne),
+                                fontSize: vacFontSize, color: textColorOne),
                           )
                         ],
                       ),
@@ -984,10 +878,10 @@ class _MainPageState extends State<MainPage> {
                             ),
                             child: Material(
                               elevation: 1,
-                              color: _reportingIconColor,
+                              color: reportingIconColor,
                               shape: SquircleBorder(
                                 side: BorderSide(
-                                    color: _reportingIconColor, width: 1.9),
+                                    color: reportingIconColor, width: 1.9),
                               ),
                               child: const Center(
                                 child: FaIcon(
@@ -998,12 +892,12 @@ class _MainPageState extends State<MainPage> {
                               ),
                             ), // Squircle
                           ),
-                          SizedBox(height: _heightSizedBox),
+                          SizedBox(height: heightSizedBox),
                           Text(
                             "Vaccine ADR Reporting",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: _vacFontSize, color: _textColorOne),
+                                fontSize: vacFontSize, color: textColorOne),
                           )
                         ],
                       ),
@@ -1036,7 +930,7 @@ class _MainPageState extends State<MainPage> {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: _cardShadowColor,
+                  color: cardShadowColor,
                   blurRadius: 5.0,
                 ),
               ],
@@ -1066,10 +960,10 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   child: Material(
                                     elevation: 1,
-                                    color: _homeIsoIconColor,
+                                    color: homeIsoIconColor,
                                     shape: SquircleBorder(
                                       side: BorderSide(
-                                          color: _homeIsoIconColor, width: 1.9),
+                                          color: homeIsoIconColor, width: 1.9),
                                     ),
                                     child: const Center(
                                       child: FaIcon(
@@ -1080,13 +974,13 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                   ), // Squircle
                                 ),
-                                SizedBox(height: _heightSizedBox),
+                                SizedBox(height: heightSizedBox),
                                 Text(
                                   "Home Isolation",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: _serviceFontSize,
-                                      color: _textColorOne),
+                                      fontSize: serviceFontSize,
+                                      color: textColorOne),
                                 )
                               ],
                             ),
@@ -1102,10 +996,10 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   child: Material(
                                     elevation: 1,
-                                    color: _epidemicMapIconColor,
+                                    color: epidemicMapIconColor,
                                     shape: SquircleBorder(
                                       side: BorderSide(
-                                          color: _epidemicMapIconColor,
+                                          color: epidemicMapIconColor,
                                           width: 1.9),
                                     ),
                                     child: const Center(
@@ -1117,13 +1011,13 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                   ), // Squircle
                                 ),
-                                SizedBox(height: _heightSizedBox),
+                                SizedBox(height: heightSizedBox),
                                 Text(
                                   "Epidemic Map",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: _serviceFontSize,
-                                      color: _textColorOne),
+                                      fontSize: serviceFontSize,
+                                      color: textColorOne),
                                 )
                               ],
                             ),
@@ -1139,10 +1033,10 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   child: Material(
                                     elevation: 1,
-                                    color: _selfAssessIconColor,
+                                    color: selfAssessIconColor,
                                     shape: SquircleBorder(
                                       side: BorderSide(
-                                          color: _selfAssessIconColor,
+                                          color: selfAssessIconColor,
                                           width: 1.9),
                                     ),
                                     child: const Center(
@@ -1154,13 +1048,13 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                   ), // Squircle
                                 ),
-                                SizedBox(height: _heightSizedBox),
+                                SizedBox(height: heightSizedBox),
                                 Text(
                                   "Self-Assessment",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: _serviceFontSize,
-                                      color: _textColorOne),
+                                      fontSize: serviceFontSize,
+                                      color: textColorOne),
                                 )
                               ],
                             ),
@@ -1184,10 +1078,10 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   child: Material(
                                     elevation: 1,
-                                    color: _tipIconColor,
+                                    color: tipIconColor,
                                     shape: SquircleBorder(
                                       side: BorderSide(
-                                          color: _tipIconColor, width: 1.9),
+                                          color: tipIconColor, width: 1.9),
                                     ),
                                     child: const Center(
                                       child: FaIcon(
@@ -1198,13 +1092,13 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                   ), // Squircle
                                 ),
-                                SizedBox(height: _heightSizedBox),
+                                SizedBox(height: heightSizedBox),
                                 Text(
                                   "COVID-19 Tips",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: _serviceFontSize,
-                                      color: _textColorOne),
+                                      fontSize: serviceFontSize,
+                                      color: textColorOne),
                                 )
                               ],
                             ),
@@ -1216,7 +1110,7 @@ class _MainPageState extends State<MainPage> {
                                   height: 42,
                                   width: 42,
                                   decoration: BoxDecoration(
-                                    color: _bruneiIconColor,
+                                    color: bruneiIconColor,
                                     borderRadius: const BorderRadius.only(
                                         topRight: Radius.circular(12.0),
                                         bottomRight: Radius.circular(12.0),
@@ -1225,10 +1119,10 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   child: Material(
                                     elevation: 1,
-                                    color: _bruneiIconColor,
+                                    color: bruneiIconColor,
                                     shape: SquircleBorder(
                                       side: BorderSide(
-                                          color: _bruneiIconColor, width: 1.9),
+                                          color: bruneiIconColor, width: 1.9),
                                     ),
                                     child: const Center(
                                       child: FaIcon(
@@ -1239,13 +1133,13 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: _heightSizedBox),
+                                SizedBox(height: heightSizedBox),
                                 Text(
                                   "COVID-19 in Brunei",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: _serviceFontSize,
-                                      color: _textColorOne),
+                                      fontSize: serviceFontSize,
+                                      color: textColorOne),
                                 )
                               ],
                             ),
@@ -1367,13 +1261,13 @@ class _PremisePageState extends State<PremisePage> {
                         // color: Colors.green,
                         child: WaveWidget(
                           config: CustomConfig(
-                            gradients: _greenWave,
+                            gradients: greenWave,
                             durations: [35000, 19440, 12800, 10000],
                             heightPercentages: [0.80, 0.83, 0.85, 0.88],
                             gradientBegin: Alignment.topRight,
                             gradientEnd: Alignment.bottomLeft,
                           ),
-                          backgroundColor: _greenBackground,
+                          backgroundColor: greenBackground,
                           duration: 32000,
                           waveAmplitude: 0,
                           heightPercentange: 1,
@@ -1414,7 +1308,7 @@ class _PremisePageState extends State<PremisePage> {
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     Text(
-                                      _premiseName,
+                                      premiseName,
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                           color: Colors.white,
@@ -1457,7 +1351,7 @@ class _PremisePageState extends State<PremisePage> {
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: _cardShadowColor,
+                            color: cardShadowColor,
                             blurRadius: 5.0,
                           ),
                         ],
@@ -1480,10 +1374,10 @@ class _PremisePageState extends State<PremisePage> {
                                     const SizedBox(height: 10.0),
                                     CircleAvatar(
                                       radius: 24,
-                                      backgroundColor: _artIconColor,
+                                      backgroundColor: artIconColor,
                                       child: FaIcon(
                                         FontAwesomeIcons.userShield,
-                                        color: _bottomInnerIconColor,
+                                        color: bottomInnerIconColor,
                                       ),
                                     ),
                                   ],
@@ -1498,13 +1392,13 @@ class _PremisePageState extends State<PremisePage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        _name,
+                                        name,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(height: 5.0),
                                       Text(
-                                        "Myself | $_idNumber",
+                                        "Myself | $idNumber",
                                         style: const TextStyle(
                                             color: Colors.grey, fontSize: 12.0),
                                       ),
