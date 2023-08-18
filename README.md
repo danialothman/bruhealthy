@@ -2,8 +2,6 @@
 
 Built with Flutter.
 
-https://github.com/danialothman/bruhealthy/assets/10879981/3b95fbb2-94bb-4500-8063-6572c77cfa06
-
 <table>
 <tr>
 <td><img src="image/screenshot.png" width="200"></td>
