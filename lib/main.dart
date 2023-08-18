@@ -262,9 +262,9 @@ class _MainPageState extends State<MainPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Change Content'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
+              children: <Widget>[
                 Text('Name'),
                 TextField(),
                 Text('Gender'),
@@ -1250,9 +1250,9 @@ class _MainPageState extends State<MainPage> {
                               ],
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             child: Column(
-                              children: const [],
+                              children: [],
                             ),
                           )
                         ],
@@ -1320,8 +1320,8 @@ class _PremisePageState extends State<PremisePage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Wrap(
-                  children: const <Widget>[
+                child: const Wrap(
+                  children: <Widget>[
                     FaIcon(
                       FontAwesomeIcons.arrowLeft,
                       color: Color(0xff18beb5),

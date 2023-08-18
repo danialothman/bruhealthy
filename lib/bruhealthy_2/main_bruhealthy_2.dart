@@ -198,15 +198,15 @@ class _MyHomePageState extends State<MyHomePage> {
                             topLeft: Radius.circular(10.0),
                             topRight: Radius.circular(10.0))),
                     // color: Colors.green,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
                       child: Column(
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 Padding(
                                   padding:
                                       EdgeInsets.only(top: 24.0, bottom: 10.0),
@@ -229,10 +229,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.only(top: 24.0, bottom: 0.0),
+                                EdgeInsets.only(top: 24.0, bottom: 0.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text('Expiration time',
                                     style: TextStyle(
                                         color: Colors.white70, fontSize: 12.0)),
@@ -313,8 +313,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       fontSize: 18.0),
                                 ),
                               ),
-                              Row(
-                                children: const [
+                              const Row(
+                                children: [
                                   FaIcon(
                                     FontAwesomeIcons.solidCircleQuestion,
                                     size: 18.0,
@@ -458,9 +458,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const Spacer(),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
+              children: [
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -497,8 +497,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-                elevation: 0,
-                primary: Colors.transparent,
+                elevation: 0, backgroundColor: Colors.transparent,
                 padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20))),
@@ -510,9 +509,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Container(
                 height: 35,
                 alignment: Alignment.center,
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(MdiIcons.lineScan),
                     SizedBox(
                       width: 10,
@@ -528,16 +527,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           OutlinedButton(
             style: ElevatedButton.styleFrom(
-              splashFactory: NoSplash.splashFactory,
-              primary: Colors.white,
+              splashFactory: NoSplash.splashFactory, backgroundColor: Colors.white,
               side: const BorderSide(color: Color(0xff18beb5)),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
             onPressed: () {},
-            child: Wrap(
-              children: const <Widget>[
+            child: const Wrap(
+              children: <Widget>[
                 FaIcon(
                   FontAwesomeIcons.qrcode,
                   color: Color(0xff18beb5),
