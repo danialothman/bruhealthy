@@ -348,7 +348,7 @@ class _MainPageState extends State<MainPage> {
                       backgroundColor: initialBackground, // Card Color
                       duration: 32000,
                       waveAmplitude: 0,
-                      heightPercentange: 1,
+                      heightPercentage: 1,
                       size: const Size(
                         double.infinity,
                         100,
@@ -1270,7 +1270,7 @@ class _PremisePageState extends State<PremisePage> {
                           backgroundColor: greenBackground,
                           duration: 32000,
                           waveAmplitude: 0,
-                          heightPercentange: 1,
+                          heightPercentage: 1,
                           size: const Size(
                             double.infinity,
                             200,
