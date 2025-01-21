@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
             onLongPress: _resetDose,
             child: FloatingActionButton(
               splashColor: const Color(0xffcccccc),
-              backgroundColor: const Color(0xff170626),
+              backgroundColor: const Color.fromARGB(255, 225, 225, 225),
               onPressed: _moreDose,
               child: const FaIcon(
                 FontAwesomeIcons.syringe,
